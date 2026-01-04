@@ -3,7 +3,7 @@ import {
   dehydrate,
   QueryClient,
 } from "@tanstack/react-query";
-import { fetchNoteById } from "@/lib/api";
+import { fetchNoteById } from "@/lib/api/clientApi";
 import NoteDetailsClient from "./NoteDetails.client";
 import { Metadata } from "next";
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: note.content,
     openGraph: {
       title: note.title,
-      description: note.content.slice(0, 30),
+      description: note.content,
       url: `https://07-routing-nextjs-rust-nu.vercel.app/notes/${id}`,
       images: [
         {

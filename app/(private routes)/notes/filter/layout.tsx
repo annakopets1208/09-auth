@@ -10,7 +10,7 @@ const NotesLayout = ({ children, sidebar }: Props) => {
   return (
     <section className={css.container}>
       <aside className={css.sidebar}>{sidebar}</aside>
-      <main className={css.notesWrapper}>{children}</main>
+      <div className={css.notesWrapper}>{children}</div>
     </section>
   );
 };

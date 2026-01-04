@@ -6,7 +6,7 @@ type ErrorProps = {
 
 const Error = ({ error }: ErrorProps) => {
   console.log(error);
-  return <p>Could not fetch note details. {error.message}</p>;
+  return <p>Something went wrong. {error.message}.</p>;
 };
 
 export default Error;

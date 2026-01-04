@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { Metadata } from "next";
 
 interface NotePageProps {
@@ -47,7 +47,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient slug={slug} />
+      <NotesClient tag={slug[0]} />
     </HydrationBoundary>
   );
 }
