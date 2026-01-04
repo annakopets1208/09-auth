@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import css from "./SignInPage.module.css";
 import { login, authProps } from "@/lib/api/clientApi";
 import { useState } from "react";
-import { ApiError } from "../sing-up/page";
+import { ApiError } from "../sign-up/page";
 import { useAuthStore } from "@/lib/store/authStore";
 
 const SingIn = () => {
