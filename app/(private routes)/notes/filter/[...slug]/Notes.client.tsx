@@ -1,34 +1,36 @@
 "use client";
 
-import css from "./NotesPage.module.css";
-import { fetchNotes } from "@/lib/api/clientApi";
-import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { useState } from "react";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
+import NoteList from "@/components/NoteList/NoteList";
 import Link from "next/link";
 
+import css from "./Notes.module.css";
+
 interface NotesClientProps {
-  tag?: string;
+  slug: string[];
 }
 
-export default function NotesClient({ tag }: NotesClientProps) {
+const NotesClient = ({ slug }: NotesClientProps) => {
   const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const category = tag === "all" ? undefined : tag;
+
+  const category = slug?.[0] === "all" ? "" : slug?.[0] ?? "";
 
   const handleChange = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setCurrentPage(1);
       setName(event.target.value);
     },
-    500
+    250
   );
 
   const { data } = useQuery({
-    queryKey: ["notes", name, currentPage, tag],
+    queryKey: ["notes", name, currentPage, category],
     queryFn: () => fetchNotes(name, currentPage, category),
     placeholderData: keepPreviousData,
   });
@@ -55,4 +57,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
       </div>
     </>
   );
-}
+};
+
+export default NotesClient;
